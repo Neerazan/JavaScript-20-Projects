@@ -7,7 +7,7 @@ function setAttribute(element, attributes) {
 }
 
 function updateAPIURLWithNewCount(picCount) {
-    apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${picCount}&query=beautiful girl`;
+    apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${picCount}&query=nature`;
 }
 
 const imageContainer = document.getElementById('image-container');
@@ -22,7 +22,7 @@ let totalImages = 0;
 //Unsplash API
 let initialCount = 3;
 const apiKey = '1qLhn7ua3lVmm6ICI83uC2L2AcjnudxJHiZAyKTF2nc';
-let apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${initialCount}&query=beautiful girl`;
+let apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${initialCount}&query=nature`;
 
 //create elements for links and photos, add to DOM
 function displayPhotos(){
