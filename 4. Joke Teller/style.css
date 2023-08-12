@@ -48,6 +48,12 @@ button:disabled{
   filter: brightness(30%);
 }
 
+audio{
+  background-color: #ff3482;
+  border-radius: 20px;
+  margin-top: 5px;
+}
+
 /* Media query */
 @media screen and (max-width: 1000px) {
   .container {
