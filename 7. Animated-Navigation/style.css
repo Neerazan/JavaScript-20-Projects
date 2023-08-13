@@ -75,6 +75,7 @@ nav ul {
 nav ul li{
   height: 20%;
   overflow: hidden;
+  cursor: pointer;
 }
 
 nav li a{
@@ -93,7 +94,14 @@ nav li a:hover{
   transform: scale(1.2);
 }
 
-nav li a::before{
+nav li:hover{
+  /* filter: brightness(120%); */
+  /* filter: contrast(120%); */
+  /* filter: blur(0.05rem); */
+  filter: grayscale(100%);
+}
+
+/* nav li a::before{
   content: "";
   width: 25vw;
   height: 3px;
@@ -106,7 +114,7 @@ nav li a::before{
 
 nav li a:hover::before{
   opacity: 1;
-}
+} */
 
 
 /* Slide in animation with delay for each nav items */
