@@ -7,6 +7,16 @@ const nav4 = document.getElementById('nav-4');
 const nav5 = document.getElementById('nav-5');
 
 
+const navItems = [nav1, nav2, nav3, nav4, nav5];
+
+//control navigation animation
+
+function navAnimation(dir1, dir2){
+    navItems.forEach((nav, index)=>{
+        nav.classList.replace(`slide-${dir1}-${index+1}`, `slide-${dir2}-${index+1}`);
+    })
+}
+
 function toggleNav(){
     //Toggle: Menu bars open/closed
     menuBars.classList.toggle('change');
@@ -15,19 +25,20 @@ function toggleNav(){
     overlay.classList.toggle('overlay-active')
     if(overlay.classList.contains('overlay-active')){
         //Animate In - Overlay
-        overlay.classList.remove('overlay-slide-left')
-        overlay.classList.add('overlay-slide-right');
+        overlay.classList.replace('overlay-slide-left', 'overlay-slide-right');
+
+        //Animation In - Nav Items
+        navAnimation('out', 'in');
     }else{
         //Animate Out - Overlay
-        overlay.classList.remove('overlay-slide-right')
-        overlay.classList.add('overlay-slide-left');
+        overlay.classList.replace('overlay-slide-right', 'overlay-slide-left');
+        //Animation out - Nav Items
+        navAnimation('in', 'out');
     }
 }
 
 //Event Listeaners
 menuBars.addEventListener('click', toggleNav);
-nav1.addEventListener('click', toggleNav);
-nav2.addEventListener('click', toggleNav);
-nav3.addEventListener('click', toggleNav);
-nav4.addEventListener('click', toggleNav);
-nav5.addEventListener('click', toggleNav);
+navItems.forEach((nav) => {
+    nav.addEventListener('click', toggleNav);
+})

@@ -106,46 +106,60 @@ nav li a::before{
 
 nav li a:hover::before{
   opacity: 1;
-  -moz-animation-name: fadeInLeft;
-  animation-name: fadeInLeft;
-  -moz-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -moz-animation-duration: 0.3s;
-  animation-duration: 0.3s;
-  -moz-animation-delay: 0.3s;
-  animation-delay: 0.3s;
 }
 
-@-moz-keyframes fadeInLeft {
-  from {
-      opacity:0;
-      -webkit-transform: translatex(-100px);
-      -moz-transform: translatex(-100px);
-      -o-transform: translatex(-100px);
-      transform: translatex(-100px);
+
+/* Slide in animation with delay for each nav items */
+.slide-in-1{
+  animation: slide-in 0.4s linear 0.2s both;
+}
+.slide-in-2{
+  animation: slide-in 0.4s linear 0.4s both;
+}
+.slide-in-3{
+  animation: slide-in 0.4s linear 0.6s both;
+}
+.slide-in-4{
+  animation: slide-in 0.4s linear 0.8s both;
+}
+.slide-in-5{
+  animation: slide-in 0.4s linear 1s both;
+}
+
+@keyframes slide-in {
+  from{
+    transform: translateX(-100%);
   }
   to {
-      opacity:1;
-      -webkit-transform: translatex(0);
-      -moz-transform: translatex(0);
-      -o-transform: translatex(0);
-      transform: translatex(0);
+    transform: translateX(0);
   }
 }
-@keyframes fadeInLeft {
-  from {
-      opacity:0;
-      -webkit-transform: translatex(-100px);
-      -moz-transform: translatex(-100px);
-      -o-transform: translatex(-100px);
-      transform: translatex(-100px);
+
+
+/* Slide out animation with delay for each nav item */
+
+.slide-out-1{
+  animation: slide-out 0.4 linear 1s both;
+}
+.slide-out-2{
+  animation: slide-out 0.4 linear 0.8s both;
+}
+.slide-out-3{
+  animation: slide-out 0.4 linear 0.6s both;
+}
+.slide-out-4{
+  animation: slide-out 0.4 linear 0.4s both;
+}
+.slide-out-5{
+  animation: slide-out 0.4 linear 0.2s both;
+}
+
+@keyframes slide-out {
+  from{
+    transform: translateX(0);
   }
   to {
-      opacity:1;
-      -webkit-transform: translatex(0);
-      -moz-transform: translatex(0);
-      -o-transform: translatex(0);
-      transform: translatex(0);
+    transform: translateX(-100%);
   }
 }
 
