@@ -103,7 +103,6 @@ function updateProgressBar(event) {
         if(durationSecond < 10){
             durationSecond = `0${durationSecond}`;
         }
-        console.log(`${durationMinutes}:${durationSecond}`);
         
         //Delay switching duration Element to adoid NaN
         if(durationSecond) {
@@ -116,13 +115,21 @@ function updateProgressBar(event) {
         if(currentSecond < 10){
             currentSecond = `0${currentSecond}`;
         }
-        console.log(`${currentMinutes}:${currentSecond}`);
-
         currentTimeEl.textContent = `${currentMinutes}:${currentSecond}`;
     }
+}
+
+//Set Progress Bar
+function setProgressBar(event) {
+    const width = this.clientWidth;
+    const clickX = event.offsetX;
+    const { duration } = music;
+    music.currentTime = (clickX / width) * duration;
 }
 
 //Event Listeaners
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
+progressContainer.addEventListener('click', setProgressBar);
+music.addEventListener('ended', nextSong);
