@@ -10,6 +10,9 @@ const progressContainer = document.getElementById('progress-container');
 const progress = document.getElementById('progress');
 const currentTimeEl = document.getElementById('current-time');
 const durationEl = document.getElementById('duration');
+const volumeSlider = document.getElementById('volumeSlider');
+const volumeIcon = document.getElementById('volume');
+const volumeStatus = document.getElementById('volumeStatus');
 
 //Music
 const songs = [
@@ -25,8 +28,18 @@ const songs = [
     },
     {
         name: 'jacinto-3',
-        displayName: 'Seven Nation Army (Remix)',
-        artist: 'Jacinto Design'
+        displayName: 'Positions',
+        artist: 'Ariana Grande'
+    },
+    {
+        name: 'jacinto-4',
+        displayName: 'Yo x Ti, Tu x Mi',
+        artist: 'ROSALÍA'
+    },
+    {
+        name: 'jacinto-5',
+        displayName: `God's Plan`,
+        artist: 'Drake'
     }
 ]
 
@@ -127,9 +140,42 @@ function setProgressBar(event) {
     music.currentTime = (clickX / width) * duration;
 }
 
+let isMute = false;
+
+//Music Volume
+function musicVolume(event) {
+    console.log(event.target.value);
+    if(event.target.value === '0'){
+        music.volume = 0;
+        volumeIcon.classList.replace('fa-volume-up', 'fa-volume-mute')
+        volumeStatus.textContent = '0';
+        isMute = true;
+    }else{
+        volumeIcon.classList.replace('fa-volume-mute', 'fa-volume-up')
+        songVolume = event.target.value/10;
+        music.volume = songVolume;
+        volumeStatus.textContent = event.target.value;
+        isMute = false;
+    }
+}
+
+function muteUnmute(){
+    if(isMute){
+        volumeIcon.classList.replace('fa-volume-mute', 'fa-volume-up')
+        music.muted = false;
+        isMute = false
+    }else{
+        volumeIcon.classList.replace('fa-volume-up', 'fa-volume-mute')
+        music.muted = true;
+        isMute = true;
+    }
+}
+
 //Event Listeaners
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 progressContainer.addEventListener('click', setProgressBar);
 music.addEventListener('ended', nextSong);
+volumeSlider.addEventListener('change', musicVolume);
+volumeIcon.addEventListener('click', muteUnmute);
