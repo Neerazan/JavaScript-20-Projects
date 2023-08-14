@@ -144,7 +144,6 @@ let isMute = false;
 
 //Music Volume
 function musicVolume(event) {
-    console.log(event.target.value);
     if(event.target.value === '0'){
         music.volume = 0;
         volumeIcon.classList.replace('fa-volume-up', 'fa-volume-mute')
