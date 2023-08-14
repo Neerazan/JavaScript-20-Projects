@@ -8,6 +8,8 @@ const artist = document.getElementById('artist');
 
 const progressContainer = document.getElementById('progress-container');
 const progress = document.getElementById('progress');
+const currentTimeEl = document.getElementById('current-time');
+const durationEl = document.getElementById('duration');
 
 //Music
 const songs = [
@@ -91,7 +93,32 @@ function updateProgressBar(event) {
 
         //update Progress bar width
         const progressPercent = (currentTime/duration) * 100;
-        progress.style.width = `${progressPercent}%`
+        if(progressPercent){
+            progress.style.width = `${progressPercent}%`;
+        }
+
+        //Calculate display for duration
+        const durationMinutes = Math.floor(duration / 60);
+        let durationSecond = Math.floor(duration % 60);
+        if(durationSecond < 10){
+            durationSecond = `0${durationSecond}`;
+        }
+        console.log(`${durationMinutes}:${durationSecond}`);
+        
+        //Delay switching duration Element to adoid NaN
+        if(durationSecond) {
+            durationEl.textContent = `${durationMinutes}:${durationSecond}`;
+        }
+
+        //Calculate display for current
+        const currentMinutes = Math.floor(currentTime / 60);
+        let currentSecond = Math.floor(currentTime % 60);
+        if(currentSecond < 10){
+            currentSecond = `0${currentSecond}`;
+        }
+        console.log(`${currentMinutes}:${currentSecond}`);
+
+        currentTimeEl.textContent = `${currentMinutes}:${currentSecond}`;
     }
 }
 
