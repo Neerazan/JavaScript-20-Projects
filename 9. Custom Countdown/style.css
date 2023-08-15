@@ -87,6 +87,7 @@ input {
   font-style: italic;
 }
 
+
 /* Button */
 button {
   width: 100%;
@@ -101,7 +102,10 @@ button {
   outline: none;
 }
 
+button:hover {
+  filter: brightness(110%);
 
+}
 
 /* Countdown */
 ul {
