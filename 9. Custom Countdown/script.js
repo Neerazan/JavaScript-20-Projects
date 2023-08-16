@@ -121,3 +121,5 @@ completeBtn.addEventListener('click', reset);
 
 //On Load Check LocalStorage
 restorePreviousCountdown()
+
+//Finish project
