@@ -6,6 +6,8 @@ const websiteNameEl = document.getElementById('website-name');
 const websiteUrlEl =  document.getElementById('website-url');
 const bookmarksContainer = document.getElementById('bookmarks-container');
 
+let bookmarks = [];
+
 //Show Modal, Fouse on Input
 function showModal() {
     modal.classList.add("show-modal");
@@ -43,6 +45,26 @@ function validate(nameValue, urlValue){
     //Valid
     return true;
 }
+
+// Fetch Bookmarks
+function fetchBookmarks(){
+    //get bookmarks from localstorage if available
+    if (localStorage.getItem('bookmarks')){
+        bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    }else{
+        //create bookmarks array in localstorage
+        bookmarks = [
+            {
+                name: 'Nirajan',
+                url: 'nirajandhakal.me'
+            }
+        ];
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    }
+    console.log(bookmarks);
+}
+
+
 //Handle Data from Form
 function storeBookmark(event) {
     event.preventDefault();
@@ -51,12 +73,26 @@ function storeBookmark(event) {
     if(!urlValue.includes('http://', 'https://')){
         urlValue = `https://${urlValue}`;
     }
-    console.log(nameValue, urlValue);
     
     if(!validate(nameValue, urlValue)) {
         return false;
     }
+
+    const bookmark = {
+        name: nameValue,
+        url: urlValue
+    };
+
+    bookmarks.push(bookmark);
+    console.log(bookmarks)
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    fetchBookmarks();
+    bookmarkForm.reset();
+    websiteNameEl.focus();
 }
 
 //General Event Listeners
 bookmarkForm.addEventListener('submit', storeBookmark)
+
+//on load, fetch bookmarks
+fetchBookmarks();
