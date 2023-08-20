@@ -21,6 +21,7 @@ modalShow.addEventListener('click', showModal);
 modalClose.addEventListener('click', () => {
     modal.classList.remove('show-modal');
 })
+
 window.addEventListener('click', (event) => {
     event.target === modal ? modal.classList.remove('show-modal') : false
 })
@@ -97,7 +98,7 @@ function fetchBookmarks(){
         bookmarks = [
             {
                 name: 'Nirajan',
-                url: 'nirajandhakal.me'
+                url: 'http://nirajandhakal.me'
             }
         ];
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
@@ -138,7 +139,6 @@ function storeBookmark(event) {
     };
 
     bookmarks.push(bookmark);
-    console.log(bookmarks)
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     fetchBookmarks();
     bookmarkForm.reset();
