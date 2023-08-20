@@ -4,12 +4,12 @@ const progressBar = document.querySelector('.progress-bar');
 const playBtn = document.getElementById('play-btn');
 const volumeIcon = document.getElementById('volume-icon');
 const volumeRange = document.querySelector('.volume-range');
-const volumeBar =  document.querySelector('.volume-bar');
+const volumeBar = document.querySelector('.volume-bar');
 const currentTime = document.querySelector('.time-elapsed');
 const duration = document.querySelector('.time-duration');
-const fullscreenBtn = document.querySelector('.fullScreen');
+const fullscreenBtn = document.querySelector('.fullscreen');
 const speed = document.querySelector('.player-speed');
-
+const player = document.querySelector('.player');
 // Play & Pause ----------------------------------- //
 
 function showPlayIcon() {
@@ -21,7 +21,7 @@ function togglePlay() {
     if (video.paused) {
         video.play();
         playBtn.classList.replace('fa-play', 'fa-pause');
-    }else {
+    } else {
         video.pause();
         showPlayIcon();
     }
@@ -35,22 +35,22 @@ video.addEventListener('ended', showPlayIcon);
 
 // calculate display time format
 function displayTime(time) {
-    const minutes = Math.floor(time/60);
-    let seconds =  Math.floor(time%60);
+    const minutes = Math.floor(time / 60);
+    let seconds = Math.floor(time % 60);
     seconds = seconds > 9 ? seconds : `0${seconds}`;
     return `${minutes}:${seconds}`;
 }
 
 // Update progress bar as video plays
 function updateProgress() {
-    progressBar.style.width = `${(video.currentTime/video.duration)*100}%`;
+    progressBar.style.width = `${(video.currentTime / video.duration) * 100}%`;
     currentTime.textContent = `${displayTime(video.currentTime)}/`
     duration.textContent = `${displayTime(video.duration)}`
 }
 
 // Click to seek within the video
 function setProgress(event) {
-    const newTime = event.offsetX/progressRange.offsetWidth;
+    const newTime = event.offsetX / progressRange.offsetWidth;
     progressBar.style.width = `${newTime * 100}%`;
     video.currentTime = newTime * video.duration;
 }
@@ -60,13 +60,13 @@ let lastVolume = 1;
 
 //Volume bar
 function changeVolume(event) {
-    let volume = event.offsetX/volumeRange.offsetWidth;
+    let volume = event.offsetX / volumeRange.offsetWidth;
 
     // rounding volume up or down
     if (volume < 0.1) {
         volume = 0;
     }
-    if(volume > 0.9) {
+    if (volume > 0.9) {
         volume = 1;
     }
 
@@ -74,7 +74,7 @@ function changeVolume(event) {
     video.volume = volume;
 
     volumeIcon.className = '';
-    if(volume > 0.7) {
+    if (volume > 0.7) {
         volumeIcon.classList.add('fas', 'fa-volume-up')
     } else if (volume < 0.7 && volume > 0) {
         volumeIcon.classList.add('fas', 'fa-volume-down');
@@ -94,7 +94,7 @@ function toggleMute() {
         volumeBar.style.width = 0;
         volumeIcon.classList.add('fas', 'fa-volume-mute');
         volumeIcon.setAttribute('title', 'Unmute');
-    }else {
+    } else {
         video.volume = lastVolume;
         volumeBar.style.width = `${lastVolume * 100}%`;
         volumeIcon.classList.add('fas', 'fa-volume-up');
@@ -111,6 +111,40 @@ function changeSpeed() {
 
 
 // Fullscreen ------------------------------- //
+function openFullscreen(elem) {
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+    video.classList.add('video-fullscreen');
+}
+
+/* Close fullscreen */
+function closeFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+    video.classList.remove('video-fullscreen');
+}
+
+let fullScreen = false;
+
+//Toggle fullscreen
+function toggleFullScreen() {
+    if (!fullScreen) {
+        openFullscreen(player);
+    } else {
+        closeFullscreen();
+    }
+    fullScreen = !fullScreen;
+}
 
 
 // Event Listeners
@@ -122,3 +156,4 @@ progressRange.addEventListener('click', setProgress);
 volumeRange.addEventListener('click', changeVolume);
 volumeIcon.addEventListener('click', toggleMute);
 speed.addEventListener('change', changeSpeed);
+fullscreenBtn.addEventListener('click', toggleFullScreen);
