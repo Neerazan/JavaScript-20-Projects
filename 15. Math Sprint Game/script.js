@@ -32,6 +32,12 @@ const wrongFormat = [];
 
 // Scroll
 
+//Displays game page
+function showGamePage() {
+  countdownPage.hidden = true;
+  gamePage.hidden = false;
+}
+
 //get random number up to a max number
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -68,7 +74,23 @@ function createEquations() {
     equationsArray.push(equationObject);
   }
   shuffle(equationsArray);
-  console.log('equations array: ', equationsArray);
+}
+
+//Add equations to DOM
+function equationsToDOM() {
+  equationsArray.forEach((equation) => {
+    //Item
+    const item = document.createElement('div');
+    item.classList.add('item')
+
+    //equation text
+    const equationText = document.createElement('h1');
+    equationText.textContent = equation.value;
+
+    //append
+    item.appendChild(equationText);
+    itemContainer.appendChild(item);
+  });
 }
 
 // Dynamically adding correct/incorrect equations
@@ -85,6 +107,8 @@ function populateGamePage() {
   itemContainer.append(topSpacer, selectedItem);
 
   // Create Equations, Build Elements in DOM
+  createEquations();
+  equationsToDOM();
 
   // Set Blank Space Below
   const bottomSpacer = document.createElement('div');
@@ -112,7 +136,8 @@ function showCountdown() {
   countdownPage.hidden = false;
   splashPage.hidden = true;
   countdownStart();
-  createEquations();
+  populateGamePage()
+  setTimeout(showGamePage, 400);
 }
 
 //Get the value from selecte radio button
