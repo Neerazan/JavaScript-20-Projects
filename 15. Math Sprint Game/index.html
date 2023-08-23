@@ -16,7 +16,7 @@
 
 
         <!-- Splash Page -->
-        <div class="card" id="splash-page" hidden>
+        <div class="card" id="splash-page">
             <form id="start-form">
                 <div class="selection-container">
                     <!-- 10 Question radio input -->
@@ -47,7 +47,7 @@
                         </span>
                     </div>
                     <!-- 99 Question radio input -->
-                    <div class="radio-container selected-label">
+                    <div class="radio-container">
                         <label for="value-99">99 Questions</label>
                         <input type="radio" id="value-99" name="questions" value="99">
                         <span class="best-score">
@@ -84,7 +84,7 @@
         </div>
 
         <!-- Score Page -->
-        <div class="card" id="score-page">
+        <div class="card" id="score-page" hidden>
             <!-- score container -->
             <div class="score-container">
                 <h1 class="title">Your Time</h1>
@@ -92,12 +92,13 @@
                 <h1 class="base-time">Base Time: 2.4s</h1>
                 <h1 class="penalty-time">Penalty: +1.0s</h1>
             </div>
+
+            <!-- Play agin Button -->
+            <div class="score-footer">
+                <button class="play-again">Play Again</button>
+            </div>
         </div>
 
-        <!-- Play agin Button -->
-        <div class="score-footer">
-            <button class="play-again">Play Again</button>
-        </div>
 
     </div>
 
